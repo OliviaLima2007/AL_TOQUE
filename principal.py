@@ -18,9 +18,13 @@ def AbrirVentana(event):
   match event.char:
   case "1":
     VentanaMultas()
-    
   case "2":
     VentanaTurnos()
-    
   case "3":
     VentanaImpuestos()
+  case "4":
+    VentanaExpedientes()
+
+VentanaPrincipal.bind("<KeyPress>",AbrirVentana)
+
+VentanaPrincipal.mainloop()
