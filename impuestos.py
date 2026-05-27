@@ -1,113 +1,198 @@
-def agregar_numero(numero):
-    entrada.insert(END, numero)
+from tkinter import *
+from tkinter import messagebox
 
+# ---------------- FUNCIONES ---------------- #
 
-def borrar():
-    entrada.delete(0, END)
+def abrir_impuestos():
 
-
-def aceptar():
-    opcion = entrada.get()
-
-    if opcion == "1":
-        mostrar_pago("Impuesto inmobiliario")
-
-    elif opcion == "2":
-        mostrar_pago("Patente auto o moto")
-
-    elif opcion == "3":
-        mostrar_pago("ABL")
-
-    elif opcion == "4":
-        consultar_deuda()
-
-    else:
-        messagebox.showerror("Error", "Opción inválida")
-
-    entrada.delete(0, END)
-
-
-def mostrar_pago(tipo):
-    ventana = Toplevel(root)
-    ventana.title("Pago")
-    ventana.geometry("400x300")
-    ventana.config(bg="#d9d2ff")
+    ventana_impuestos = Toplevel(root)
+    ventana_impuestos.title("Impuestos")
+    ventana_impuestos.geometry("500x400")
+    ventana_impuestos.config(bg="#d9d2ff")
 
     Label(
-        ventana,
-        text=f"{tipo}",
-        font=("Arial", 14, "bold"),
+        ventana_impuestos,
+        text="TABLA DE IMPUESTOS",
+        font=("Arial", 18, "bold"),
         bg="#d9d2ff"
+    ).pack(pady=15)
+
+    # TABLA INFORMATIVA
+
+    tabla = Frame(ventana_impuestos, bg="black")
+    tabla.pack(pady=10)
+
+    datos = [["Impuesto", "Estado", "Monto / Último pago"],
+    ["Inmobiliario", "Adeuda", "$25.000"],
+    ["Patente", "Pagado","Último pago: $18.000"],
+    ["ABL", "Adeuda", "$12.500"],
+    ["Multa tránsito", "Pagado",
+     "Último pago: $7.500"]]
+
+    for fila in range(len(datos)):
+        for columna in range(len(datos[fila])):
+
+            Label(
+                tabla,
+                text=datos[fila][columna],
+                width=18,
+                height=2,
+                font=("Arial", 11),
+                bg="white",
+                relief="solid"
+            ).grid(row=fila, column=columna)
+
+    Label(
+        ventana_impuestos,
+        text="Seleccione qué impuesto desea pagar",
+        font=("Arial", 12),
+        bg="#d9d2ff"
+    ).pack(pady=15)
+
+    # SOLO SE PUEDE PAGAR SI ESTÁ ADEUDADO
+
+    Button(
+        ventana_impuestos,
+        text="Pagar Inmobiliario",
+        width=25,
+        bg="green",
+        fg="white",
+        command=lambda: abrir_pagos("Impuesto Inmobiliario", 25000)
+    ).pack(pady=5)
+
+    Button(
+        ventana_impuestos,
+        text="Pagar ABL",
+        width=25,
+        bg="green",
+        fg="white",
+        command=lambda: abrir_pagos("ABL", 12500)
+    ).pack(pady=5)
+
+    Button(
+        ventana_impuestos,
+        text="Salir",
+        width=25,
+        bg="red",
+        fg="white",
+        command=ventana_impuestos.destroy
+    ).pack(pady=15)
+
+
+def abrir_pagos(impuesto, monto):
+
+    ventana_pagos = Toplevel(root)
+    ventana_pagos.title("Pagos")
+    ventana_pagos.geometry("400x350")
+    ventana_pagos.config(bg="#cfc4ff")
+
+    Label(
+        ventana_pagos,
+        text="MÓDULO DE PAGOS",
+        font=("Arial", 18, "bold"),
+        bg="#cfc4ff"
     ).pack(pady=20)
 
     Label(
-        ventana,
-        text="Ingrese método de pago:\n1 = Tarjeta\n2 = QR",
+        ventana_pagos,
+        text=f"Impuesto: {impuesto}",
         font=("Arial", 12),
-        bg="#d9d2ff"
-    ).pack(pady=10)
+        bg="#cfc4ff"
+    ).pack(pady=5)
 
-    entrada_pago = Entry(ventana, font=("Arial", 16), justify="center")
-    entrada_pago.pack(pady=10)
+    Label(
+        ventana_pagos,
+        text=f"Monto a pagar: ${monto}",
+        font=("Arial", 12),
+        bg="#cfc4ff"
+    ).pack(pady=5)
 
-    def procesar_pago():
-        metodo = entrada_pago.get()
-
-        if metodo == "1":
-            messagebox.showinfo(
-                "Pago",
-                "Pago con tarjeta aprobado\nImprimiendo ticket..."
-            )
-
-        elif metodo == "2":
-            messagebox.showinfo(
-                "QR",
-                "QR habilitado para pagar"
-            )
-
-        else:
-            messagebox.showerror("Error", "Método inválido")
+    Label(
+        ventana_pagos,
+        text="Método de pago",
+        font=("Arial", 13, "bold"),
+        bg="#cfc4ff"
+    ).pack(pady=15)
 
     Button(
-        ventana,
-        text="Aceptar",
-        width=15,
-        command=procesar_pago
+        ventana_pagos,
+        text="Pagar con tarjeta",
+        width=25,
+        height=2,
+        command=lambda: pagar("Tarjeta")
     ).pack(pady=10)
 
+    Button(
+        ventana_pagos,
+        text="Pagar con QR",
+        width=25,
+        height=2,
+        command=lambda: pagar("QR")
+    ).pack(pady=10)
 
-def consultar_deuda():
+    Button(
+        ventana_pagos,
+        text="Cancelar",
+        width=25,
+        height=2,
+        bg="red",
+        fg="white",
+        command=ventana_pagos.destroy
+    ).pack(pady=15)
+
+
+def pagar(metodo):
+
     messagebox.showinfo(
-        "Deuda total",
-        "Impuesto inmobiliario: $25.000\n"
-        "Patente: $18.000\n"
-        "ABL: $12.500"
+        "Pago realizado",
+        f"Pago realizado correctamente con {metodo}\n"
+        "Imprimiendo ticket..."
     )
 
+
+# ---------------- VENTANA PRINCIPAL ---------------- #
+
 root = Tk()
-root.title("Sistema de Impuestos y Pagos")
-root.geometry("400x550")
+root.title("Sistema Municipal")
+root.geometry("450x300")
 root.config(bg="#cfc4ff")
 
 Label(
     root,
-    text="IMPUESTOS Y PAGOS",
-    font=("Arial", 18, "bold"),
+    text="SISTEMA MUNICIPAL",
+    font=("Arial", 20, "bold"),
     bg="#cfc4ff"
-).pack(pady=20)
+).pack(pady=30)
 
 Label(
     root,
-    text=(
-        "1 - Impuesto inmobiliario\n"
-        "2 - Patente auto o moto\n"
-        "3 - ABL\n"
-        "4 - Consultar deuda"
-    ),
-    font=("Arial", 12),
-    bg="#cfc4ff",
-    justify=LEFT
+    text="Seleccione un módulo",
+    font=("Arial", 13),
+    bg="#cfc4ff"
 ).pack(pady=10)
 
-entrada = Entry(root, font=("Arial", 20), justify="center")
-entrada.pack(pady=20)
+# ---------------- BOTONES ---------------- #
+
+Button(
+    root,
+    text="Impuestos",
+    width=30,
+    height=3,
+    bg="#8e7dff",
+    fg="white",
+    command=abrir_impuestos
+).pack(pady=10)
+
+Button(
+    root,
+    text="Salir",
+    width=30,
+    height=3,
+    bg="red",
+    fg="white",
+    command=root.destroy
+).pack(pady=10)
+
+# ---------------- EJECUCIÓN ---------------- #
+
+root.mainloop()
