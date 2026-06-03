@@ -52,13 +52,11 @@ lbl_instruccion.pack(side=tk.LEFT, padx=5)
 entrada_numero = tk.Entry(frame_entrada, font=("Arial", 11), width=15, bd=2, relief="groove")
 entrada_numero.pack(side=tk.LEFT, padx=5)
 
-# --- ¡CAMBIO AQUÍ! ---
-# Se eliminó por completo la línea 'entrada_numero.insert(0, "101")' para que el cuadro inicie en blanco.
-
 # Vincula la tecla Enter (Return) del teclado al cuadro de texto
 entrada_numero.bind("<Return>", consultar_expediente)
 
-# Esto hace que el cursor aparezca listo para escribir en este campo en cuanto abre la app
+# Esto hace que el cuadro inicie completamente vacío y el cursor aparezca listo para escribir
+entrada_numero.delete(0, tk.END)  
 entrada_numero.focus_set()
 
 btn_consultar = tk.Button(ventana, text="Buscar Estado", font=("Arial", 11, "bold"), bg="#2563eb", fg="white", 
