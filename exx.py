@@ -1,14 +1,14 @@
 import tkinter as tk
-from tkinter import messagebox
 
 # Se agrega 'event=None' para que la función acepte el evento del teclado
 def consultar_expediente(event=None):
     # Obtener el número ingresado por el usuario y quitar espacios
     numero = entrada_numero.get().strip()
     
-    # Validación: Verificar si el campo está vacío
+    # Validación: Si el campo está vacío, se muestra el aviso dentro del recuadro de resultados
     if not numero:
-        messagebox.showwarning("Campo vacío", "Por favor, ingrese un número de expediente.")
+        lbl_resultado_tramite.config(text="Campo vacío", fg="#dc2626")
+        lbl_resultado_estado.config(text="Por favor, ingrese un número de expediente.", fg="#dc2626")
         return
     
     # Evaluación dinámica sin base de datos (Estructura de control directa)
@@ -23,13 +23,12 @@ def consultar_expediente(event=None):
         estado = "No iniciado"
     
     else:
-        # Si el número no coincide con ninguno de los anteriores
+        # Si el número no coincide, también se muestra el error directamente en el recuadro
         lbl_resultado_tramite.config(text="Expediente no encontrado", fg="#dc2626")
-        lbl_resultado_estado.config(text="")
-        messagebox.showerror("Error", "El número de expediente no existe en el sistema.")
+        lbl_resultado_estado.config(text="El número de expediente no existe en el sistema.", fg="#dc2626")
         return
 
-    # Mostrar el resultado en la pantalla de visualización si se encontró
+    # Mostrar el resultado en la pantalla de visualización si se encontró exitosamente
     lbl_resultado_tramite.config(text=f"Trámite: {tramite}", fg="#1e293b")
     lbl_resultado_estado.config(text=f"Estado Actual: {estado}", fg="#2563eb")
 
@@ -51,7 +50,7 @@ lbl_instruccion.pack(side=tk.LEFT, padx=5)
 
 entrada_numero = tk.Entry(frame_entrada, font=("Arial", 11), width=15, bd=2, relief="groove")
 entrada_numero.pack(side=tk.LEFT, padx=5)
-# SE ELIMINÓ la línea 'entrada_numero.insert(0, "101")' para que inicie en blanco
+# Se quitó el texto automático para que empiece en blanco
 
 # Vincula la tecla Enter (Return) del teclado al cuadro de texto
 entrada_numero.bind("<Return>", consultar_expediente)
@@ -67,14 +66,13 @@ btn_consultar.pack(pady=15)
 frame_resultados = tk.Frame(ventana, bg="#ffffff", bd=1, relief="solid", padx=15, pady=15)
 frame_resultados.pack(fill=tk.X, padx=30, pady=10)
 
-lbl_resultado_tramite = tk.Label(frame_resultados, text="Ingrese un número para consultar", font=("Arial", 11, "italic"), bg="#ffffff", fg="#64748b")
+lbl_resultado_tramite = tk.Label(frame_resultados, text="Ingrese un número para consultar", font=("Arial", 11), bg="#ffffff", fg="#64748b")
 lbl_resultado_tramite.pack(anchor="w")
 
-lbl_resultado_estado = tk.Label(frame_resultados, text="", font=("Arial", 12, "bold"), bg="#ffffff")
+lbl_resultado_estado = tk.Label(frame_resultados, text="", font=("Arial", 11), bg="#ffffff")
 lbl_resultado_estado.pack(anchor="w", pady=(5, 0))
 
-# --- ¡NUEVA LÍNEA AQUÍ! ---
-# Ejecuta la función una vez al iniciar para que detecte que está vacío y lance la advertencia
-consultar_expediente()
+# Dispara la validación al iniciar para que avise inmediatamente de manera integrada que está vacío
+ventana.after(100, consultar_expediente)
 
 ventana.mainloop()
