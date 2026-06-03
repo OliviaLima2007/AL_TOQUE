@@ -51,12 +51,11 @@ lbl_instruccion.pack(side=tk.LEFT, padx=5)
 
 entrada_numero = tk.Entry(frame_entrada, font=("Arial", 11), width=15, bd=2, relief="groove")
 entrada_numero.pack(side=tk.LEFT, padx=5)
-entrada_numero.insert(0, "101") # Se cambió a "101" para que coincida con tus nuevas condiciones evaluadas
+# SE ELIMINÓ la línea 'entrada_numero.insert(0, "101")' para que inicie en blanco
 
 # Vincula la tecla Enter (Return) del teclado al cuadro de texto
 entrada_numero.bind("<Return>", consultar_expediente)
 
-# --- ¡NUEVA LÍNEA AQUÍ! ---
 # Esto hace que el cursor aparezca listo para escribir en este campo en cuanto abre la app
 entrada_numero.focus_set()
 
@@ -73,5 +72,9 @@ lbl_resultado_tramite.pack(anchor="w")
 
 lbl_resultado_estado = tk.Label(frame_resultados, text="", font=("Arial", 12, "bold"), bg="#ffffff")
 lbl_resultado_estado.pack(anchor="w", pady=(5, 0))
+
+# --- ¡NUEVA LÍNEA AQUÍ! ---
+# Ejecuta la función una vez al iniciar para que detecte que está vacío y lance la advertencia
+consultar_expediente()
 
 ventana.mainloop()
