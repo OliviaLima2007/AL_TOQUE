@@ -1,32 +1,30 @@
 import tkinter as tk
+import sqlite3
+from conexion import buscar_ciudadano
 
-from modulos.turnos.solicitar_turno import crear_turno
-from modulos.turnos.historial_turnos import mostrar_turnos
+ventana = tk.Toplevel()
 
-ventana=tk.Tk()
+def buscar_turnos():
+    conexion=aqlite3.connect("turnos.bd")
+    cursor=conexion.cursor()
+    cursor.execute("SELECT * FROM turnos_disponibles")
+    resultado=cursor.fetchall()
+    conexion.close()
+    return resultado
 
 def abrir_turnos(ciudadano):
-
-    ventana = tk.Toplevel()
-
-    ventana.title("Turnos")
-    ventana.geometry("600x600")
-
+        ventana.title("Turnos")
+        ventana.geometry("600x600")
 datos=tk.Label(ventana,text="DATOS DEL CIUDADANO",font=("Arial",16,"bold"))
 datos.pack(pady=10)
-
 nombre=tk.Label(ventana,text=f"Nombre: {ciudadano['nombre']}")
 nombre.pack()
-
 dni=tk.Label(ventana,text=f"DNI: {ciudadano['dni']}")
 dni.pack()
-
 telefono=tk.Label(ventana,text=f"Teléfono: {ciudadano['telefono']}")
 telefono.pack()
-
 direccion=tk.Label(ventana,text=f"Dirección: {ciudadano['direccion']}")
 direccion.pack()
-
  #   Label(ventana, text="").pack()
 
 solicitud=tk.Label(ventana,text="SOLICITUD DE TURNO",font=("Arial",16,"bold"))
