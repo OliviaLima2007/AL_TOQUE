@@ -17,13 +17,13 @@ def VentanaPrincipal (ciudadanos):
 def AbrirVentana(event):
   match event.char:
   case "1":
-    VentanaMultas()
+    VentanaMultas(ciudadanos)
   case "2":
-    VentanaTurnos()
+    VentanaTurnos(ciudadanos)
   case "3":
-    VentanaImpuestos()
+    VentanaImpuestos(ciudadanos)
   case "4":
-    VentanaExpedientes()
+    VentanaExpedientes(ciudadanos)
 
 ventana.bind("<KeyPress>",AbrirVentana)
 ventana.focus_set()
