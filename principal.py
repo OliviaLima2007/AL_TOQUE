@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from multas import VentanaMultas
+from Multas import turnos_tramites
 from turnos import abrir_turnos
 from impuestos import VentanaImpuestos
 from expedientes import VentanaExpedientes
@@ -16,15 +16,15 @@ def VentanaPrincipal (ciudadanos):
   texto=tk.Label(ventana, text="4. Para ingresar a Expedientes").pack()
 
 def AbrirVentana(event):
-  match event.char:
-  case "1":
-    VentanaMultas(ciudadanos)
-  case "2":
-    VentanaTurnos(ciudadanos)
-  case "3":
-    VentanaImpuestos(ciudadanos)
-  case "4":
-    VentanaExpedientes(ciudadanos)
+    match event.char:
+      case "1":
+        turnos_tramites(ciudadanos)
+      case "2":
+        abrir_turnos(ciudadanos)
+      case "3":
+        VentanaImpuestos(ciudadanos)
+      case "4":
+        VentanaExpedientes(ciudadanos)
 
-ventana.bind("<KeyPress>",AbrirVentana)
-ventana.focus_set()
+  ventana.bind("<KeyPress>",AbrirVentana)
+  ventana.focus_set()
