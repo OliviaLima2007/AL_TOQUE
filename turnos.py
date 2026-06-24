@@ -3,7 +3,7 @@ import sqlite3
 from conexion import buscar_ciudadano
 
 ventana = tk.Toplevel()
-
+#consulta a la base de datos de turnos
 def buscar_turnos():
     conexion=aqlite3.connect("turnos.bd")
     cursor=conexion.cursor()
@@ -12,6 +12,7 @@ def buscar_turnos():
     conexion.close()
     return resultado
 
+#llena los datos del turno
 def abrir_turnos(ciudadanos):
     ventana.title("Turnos")
     ventana.geometry("600x600")
@@ -31,6 +32,7 @@ def abrir_turnos(ciudadanos):
     entrada_lugar = tk.Entry(ventana).pack()        
     comprobante = tk.Label(ventana,text="",justify=LEFT,font=("Arial",11)).pack(pady=20)
 
+#guarda el turno
 def guardar():
         t = entrada_tramite.get()
         f = entrada_fecha.get()
