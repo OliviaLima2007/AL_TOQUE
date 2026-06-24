@@ -23,9 +23,9 @@ def parametros():
 
 def AbrirPrincipal():
   from principal import VentanaPrincipal
-  ciudadano = buscar_ciudadano(dni.get())
-  if ciudadano:
-    VentanaPrincipal(ciudadano)
+  ciudadanos = buscar_ciudadano(dni.get())
+  if ciudadanos:
+    VentanaPrincipal(ciudadanos)
     VentanaBienvenida.withdraw()    
   else:
       tk.label(VentanaBienvenida,text="DNI no encontrado").pack()
