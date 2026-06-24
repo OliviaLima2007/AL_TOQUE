@@ -21,7 +21,8 @@ def buscar_ciudadano(dni):
             "domiciliario": resultado[7],
             "exp_numero": resultado[8],
             "exp_tramite": resultado[9],
-            "exp_estado": resultado[10]
+            "exp_estado": resultado[10],
+            "patente": resultado[11]
         }
     else:
         return None
