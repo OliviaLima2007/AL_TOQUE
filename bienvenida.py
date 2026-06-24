@@ -14,12 +14,10 @@ dni.pack()
 texto=tk.Label(VentanaBienvenida, text="Para continuar por favor apretar ENTER")
 texto.pack()
 
-def parametros():
-  numero=int(dni.get())
+def parametros():  
   ciudadanos = buscar_ciudadano(dni.get())
   if len(numero)!=8:
-    texto=tk.Label(VentanaBienvenida, text="Por favor ingresar 8 numeros, sin puntos ni comas")
-    texto.pack()
+    texto=tk.Label(VentanaBienvenida, text="Por favor ingresar 8 numeros, sin puntos ni comas").pack()
     return False
   return True
 
@@ -27,8 +25,8 @@ def AbrirPrincipal():
   from principal import VentanaPrincipal
   ciudadano = buscar_ciudadano(dni.get())
   if ciudadano:
-    VentanaBienvenida.withdraw()
     VentanaPrincipal(ciudadano)
+    VentanaBienvenida.withdraw()    
   else:
       tk.label(VentanaBienvenida,text="DNI no encontrado").pack()
 
