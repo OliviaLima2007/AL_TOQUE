@@ -18,7 +18,10 @@ def buscar_ciudadano(dni):
             "multas": resultado[4],
             "imp_inmobiliario": resultado[5],
             "abl": resultado[6],
-            "domiciliario": resultado[7]
+            "domiciliario": resultado[7],
+            "exp_numero": resultado[8],
+            "exp_tramite": resultado[9],
+            "exp_estado": resultado[10]
         }
     else:
         return None
