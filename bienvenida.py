@@ -1,4 +1,5 @@
-import tinker as tk
+import tkinter as tk
+from conexion import buscar_ciudadano
 
 VentanaBienvenida = tk.Tk()
 VentanaBienvenida.title("VentanaBienvenida")
@@ -16,7 +17,7 @@ texto.pack()
 
 def parametros():  
   ciudadanos = buscar_ciudadano(dni.get())
-  if len(numero)!=8:
+  if len(dni)!=8:
     texto=tk.Label(VentanaBienvenida, text="Por favor ingresar 8 numeros, sin puntos ni comas").pack()
     return False
   return True
@@ -34,6 +35,6 @@ def key_press(event):
   if parametros():
     AbrirPrincipal()
 
-VentanaPrincipal.bind("<Return>", key_press)
+VentanaBienvenida.bind("<Return>", key_press)
 
-VentanaPrincipal.mainloop()
+VentanaBienvenida.mainloop()
