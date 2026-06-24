@@ -15,5 +15,4 @@ def VentanaExpedientes(ciudadano):
     lbl_resultado_tramite.pack(anchor="w")
     lbl_resultado_estado = tk.Label(frame_resultados, text="", font=("Arial", 12, "bold"), bg="#ffffff")
     lbl_resultado_estado.pack(anchor="w", pady=(5, 0))
-
-ventana.focus_set()
+    ventana.focus_set()
