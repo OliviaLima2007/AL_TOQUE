@@ -6,8 +6,8 @@ from impuestos import VentanaImpuestos
 from expedientes import VentanaExpedientes
 
 def VentanaPrincipal (ciudadanos):
-  ventana = tik.Toplevel()
-  ventana.attributes("-zoomed", true)
+  ventana = tk.Toplevel()
+  ventana.attributes("-zoomed", True)
   ventana.title("VentanaPrincipal")
   texto=tk.Label(ventana, text="Seleccione uno de los siguientes números para ingresar a:").pack()
   texto=tk.Label(ventana, text="1. Para ingresar a Multas").pack()
