@@ -3,6 +3,7 @@ import sqlite3
 from conexion import buscar_ciudadano
 
 ventana = tk.Toplevel()
+
 #consulta a la base de datos de turnos
 def buscar_turnos():
     conexion=aqlite3.connect("turnos.bd")
