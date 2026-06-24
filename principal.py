@@ -15,16 +15,16 @@ def VentanaPrincipal (ciudadanos):
   texto=tk.Label(ventana, text="3. Para ingresar a Impuestos").pack()
   texto=tk.Label(ventana, text="4. Para ingresar a Expedientes").pack()
 
-def AbrirVentana(event):
-    match event.char:
-      case "1":
-        turnos_tramites(ciudadanos)
-      case "2":
-        abrir_turnos(ciudadanos)
-      case "3":
-        VentanaImpuestos(ciudadanos)
-      case "4":
-        VentanaExpedientes(ciudadanos)
+  def AbrirVentana(event):
+      match event.char:
+        case "1":
+          turnos_tramites(ciudadanos)
+        case "2":
+          abrir_turnos(ciudadanos)
+        case "3":
+          VentanaImpuestos(ciudadanos)
+        case "4":
+          VentanaExpedientes(ciudadanos)
 
   ventana.bind("<KeyPress>",AbrirVentana)
   ventana.focus_set()
