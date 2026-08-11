@@ -2,8 +2,6 @@ import tkinter as tk
 import sqlite3
 from conexion import buscar_ciudadano
 
-ventana = tk.Toplevel()
-
 #consulta a la base de datos de turnos
 def buscar_turnos():
     conexion=sqlite3.connect("turnos.bd")
@@ -15,38 +13,77 @@ def buscar_turnos():
 
 #llena los datos del turno
 def abrir_turnos(ciudadanos):
-    ventana.title("Turnos")
-    ventana.geometry("600x600")
-    datos=tk.Label(ventana,text="DATOS DEL CIUDADANO",font=("Arial",16,"bold"))
-    datos.pack(pady=10)
-    nombre=tk.Label(ventana,text=f"Nombre: {ciudadanos['nombre']}")
-    nombre.pack()
-    dni=tk.Label(ventana,text=f"DNI: {ciudadanos['dni']}")
-    dni.pack()
-    telefono=tk.Label(ventana,text=f"Teléfono: {ciudadanos['telefono']}")
-    telefono.pack()
-    direccion=tk.Label(ventana,text=f"Dirección: {ciudadanos['direccion']}")
-    direccion.pack()
-    solicitud=tk.Label(ventana,text="SOLICITUD DE TURNO",font=("Arial",16,"bold"))
-    solicitud.pack(pady=10)
-    tramite=tk.Label(ventana, text="Trámite")
-    tramite.pack()        
-    entrada_tramite = tk.Entry(ventana)
-    entrada_tramite.pack()        
-    fecha=tk.Label(ventana, text="Fecha")
-    fecha.pack()        
-    entrada_fecha =tk.Entry(ventana)
-    entrada_fecha.pack()        
-    hora=tk.Label(ventana, text="Hora")
-    hora.pack()        
-    entrada_hora =tk. Entry(ventana)
-    entrada_hora.pack()        
-    lugar=tk.Label(ventana, text="Lugar")
-    lugar.pack()        
-    entrada_lugar = tk.Entry(ventana)
-    entrada_lugar.pack()        
-    comprobante = tk.Label(ventana,text="",justify="left",font=("Arial",11))
-    comprobante.pack(pady=20)
+    ventana = tk.Toplevel()
+    ventana.title("AL TOQUE - TURNOS")
+    ventana.state("zoomed")
+
+    #encabezado
+    encabezado = tk.Frame(ventana, bg="#145a32", pady=20)
+    encabezado.pack(fill=tk.X)
+
+    tk.Label(
+        encabezado,
+        text="AL TOQUE",
+        font=("Arial",22,"bold"),
+        bg="#145a32",
+        fg="#a8f0c6"
+    ).pack()
+
+    tk.Label(
+        encabezado,
+        text="Tu tramite en tus manos.",
+        font=("Arial",14,"italic"),
+        bg="#145a32",
+        fg="#d4f5e2"
+    ).pack()
+
+    #pie
+    pie=tk.Frame(ventana, bg="#145a32", pady=10)
+    pie.pack(fill=tk.X, side=tk.BOTTOM)
+    
+    tk.Label(
+        pie,
+        text="Sistema AL TOQUE | 2025")
+        font=("Arial", 11)
+        bg="#145a32",
+        fg="#a8f0c6"
+    ).pack()
+
+    #cuerpo
+    cuerpo=tk.Frame(ventana, bg="#1a3a2a")
+    cuerpo.pack(expand=True, fill=tk.BOTH)
+    
+    tk.Label(cuerpo,
+             text="SOLICITUD DE TURNO",
+             font=("Arial",16,"bold")
+             bg="#1a3a2a",
+             fg="#ffffff").pack(pady=10)
+
+    tk.Label(cuerpo,text=f"Nombre: {ciudadanos['nombre']}",font=("Arial", 16), bg="#1a3a2a", fg="#a8f0c6").pack()
+    tk.Label(cuerpo,text=f"DNI: {ciudadanos['dni']}", font=("Arial", 16), bg="#1a3a2a", fg="#a8f0c6").pack()
+    tk.Label(cuerpo,text=f"Teléfono: {ciudadanos['telefono']}", font=("Arial", 16), bg="#1a3a2a", fg="#a8f0c6").pack()
+    tk.Label(cuerpo,text=f"Dirección: {ciudadanos['direccion']}", font=("Arial", 16), bg="#1a3a2a", fg="#a8f0c6").pack()
+    tk.Label(cuerpo,text="SOLICITUD DE TURNO",font=("Arial",16,"bold"), font=("Arial", 16), bg="#1a3a2a", fg="#a8f0c6").pack()
+    
+    tk.Label(cuerpo, text="Trámite:", font=("Arial", 16), bg="#1a3a2a", fg="#d4f5e2").pack()
+    entrada_tramite = tk.Entry(cuerpo, font=("Arial", 16), bg="#1a3a2a", fg="#d4f5e2")
+    entrada_tramite.pack(pady=5)
+
+    tk.Label(cuerpo, text="Fecha",  bg="#1a3a2a", fg="#d4f5e2")
+    entrada_fecha =tk.Entry(cuerpo, font=("Arial", 16), bg="#1a3a2a", fg="#d4f5e2")
+    entrada_fecha.pack(pady=5)
+
+    tk.Label(cuerpo, text="Hora:",  bg="#1a3a2a", fg="#d4f5e2")
+    entrada_hora =tk. Entry(cuerpo, font=("Arial", 16), bg="#1a3a2a", fg="#d4f5e2")
+    entrada_hora.pack(pady=5)
+
+    tk.Label(cuerpo, text="Lugar:", bg="#1a3a2a", fg="#d4f5e2")
+    entrada_lugar = tk.Entry(cuerpo, font=("Arial", 16), bg="#1a3a2a", fg="#d4f5e2")
+    entrada_lugar.pack(pady=5)
+
+    tk.Label(cuerpo, text="Presione 1 para confirmar el turno", font=("Arial", 14), bg="#1a3a2a", fg="#6dbf8a").pack(pady=15)
+
+    tk.Label(cuerpo,text="",justify="left",font=("Arial",13), bg="#1a3a2a", fg="#a8f0c6").pack(pady=10)
 
 #guarda el turno
     def guardar():
