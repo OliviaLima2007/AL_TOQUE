@@ -111,10 +111,10 @@ def VentanaImpuestos(ciudadano):
 
         def on_key_Press_confirmacion(event):
             match event.char:
-                case "1":
-                    ventana_confirmacion.destroy()
+                case "1":                    
                     metodo_pago()
                 case "2":
+                    ventana_confirmacion.destroy()
                     resultado_confirmacion.config(text="Operación cancelada")
 
         ventana_confirmacion.bind("<KeyPress>", on_key_Press_confirmacion)
