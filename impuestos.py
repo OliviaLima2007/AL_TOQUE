@@ -1,198 +1,137 @@
-from tkinter import *
-from tkinter import messagebox
+import tkinter as tk
 
-# ---------------- FUNCIONES ---------------- #
+def VentanaImpuestos(ciudadano):
+    ventana = tk.Toplevel()
+    ventana.title("AL TOQUE - Impuestos")
+    ventana.state("zoomed")
+    ventana.configure(bg="#1a3a2a")
 
-def abrir_impuestos():
+    # ENCABEZADO
+    encabezado = tk.Frame(ventana, bg="#145a32", pady=20)
+    encabezado.pack(fill=tk.X)
 
-    ventana_impuestos = Toplevel(root)
-    ventana_impuestos.title("Impuestos")
-    ventana_impuestos.geometry("500x400")
-    ventana_impuestos.config(bg="#d9d2ff")
+    tk.Label(
+        encabezado,
+        text="MUNICIPALIDAD DE MERLO",
+        font=("Arial", 22, "bold"),
+        bg="#145a32",
+        fg="#a8f0c6"
+    ).pack()
 
-    Label(
-        ventana_impuestos,
-        text="TABLA DE IMPUESTOS",
-        font=("Arial", 18, "bold"),
-        bg="#d9d2ff"
-    ).pack(pady=15)
+    tk.Label(
+        encabezado,
+        text="Tu trámite, en tus manos.",
+        font=("Arial", 14, "italic"),
+        bg="#145a32",
+        fg="#d4f5e2"
+    ).pack()
 
-    # TABLA INFORMATIVA
+    # PIE
+    pie = tk.Frame(ventana, bg="#145a32", pady=10)
+    pie.pack(fill=tk.X, side=tk.BOTTOM)
 
-    tabla = Frame(ventana_impuestos, bg="black")
-    tabla.pack(pady=10)
+    tk.Label(
+        pie,
+        text="Sistema AL TOQUE  |  Municipalidad de Merlo  |  2025",
+        font=("Arial", 11),
+        bg="#145a32",
+        fg="#a8f0c6"
+    ).pack()
 
-    datos = [["Impuesto", "Estado", "Monto / Último pago"],
-    ["Inmobiliario", "Adeuda", "$25.000"],
-    ["Patente", "Pagado","Último pago: $18.000"],
-    ["ABL", "Adeuda", "$12.500"],
-    ["Multa tránsito", "Pagado",
-     "Último pago: $7.500"]]
+    # CUERPO
+    cuerpo = tk.Frame(ventana, bg="#1a3a2a")
+    cuerpo.pack(expand=True, fill=tk.BOTH)
 
-    for fila in range(len(datos)):
-        for columna in range(len(datos[fila])):
+    tk.Label(
+        cuerpo,
+        text="IMPUESTOS Y PAGOS",
+        font=("Arial", 28, "bold"),
+        bg="#1a3a2a",
+        fg="#ffffff"
+    ).pack(pady=(40, 20))
 
-            Label(
-                tabla,
-                text=datos[fila][columna],
-                width=18,
-                height=2,
-                font=("Arial", 11),
-                bg="white",
-                relief="solid"
-            ).grid(row=fila, column=columna)
+    opciones = [
+        "1  →  Pagar Inmobiliario",
+        "2  →  Pagar Patente",
+        "3  →  Pagar ABL",
+        "4  →  Pagar Domiciliario",
+        "5  →  Salir"
+    ]
 
-    Label(
-        ventana_impuestos,
-        text="Seleccione qué impuesto desea pagar",
-        font=("Arial", 12),
-        bg="#d9d2ff"
-    ).pack(pady=15)
+    for opcion in opciones:
+        tk.Label(
+            cuerpo,
+            text=opcion,
+            font=("Arial", 20),
+            bg="#1a3a2a",
+            fg="#a8f0c6",
+            anchor="w",
+            width=35
+        ).pack(pady=8)
 
-    # SOLO SE PUEDE PAGAR SI ESTÁ ADEUDADO
+    def metodo_pago():
+        ventana_metodo = tk.Toplevel()
+        ventana_metodo.title("Método de pago")
+        ventana_metodo.geometry("500x300")
+        ventana_metodo.configure(bg="#1a3a2a")
 
-    Button(
-        ventana_impuestos,
-        text="Pagar Inmobiliario",
-        width=25,
-        bg="green",
-        fg="white",
-        command=lambda: abrir_pagos("Impuesto Inmobiliario", 25000)
-    ).pack(pady=5)
+        tk.Label(ventana_metodo, text="MÉTODO DE PAGO", font=("Arial", 18, "bold"), bg="#1a3a2a", fg="#ffffff").pack(pady=20)
+        tk.Label(ventana_metodo, text="1. Pagar con Tarjeta", font=("Arial", 14), bg="#1a3a2a", fg="#a8f0c6").pack(pady=5)
+        tk.Label(ventana_metodo, text="2. Pagar con QR", font=("Arial", 14), bg="#1a3a2a", fg="#a8f0c6").pack(pady=5)
+        tk.Label(ventana_metodo, text="3. Cancelar", font=("Arial", 14), bg="#1a3a2a", fg="#ff6b6b").pack(pady=5)
 
-    Button(
-        ventana_impuestos,
-        text="Pagar ABL",
-        width=25,
-        bg="green",
-        fg="white",
-        command=lambda: abrir_pagos("ABL", 12500)
-    ).pack(pady=5)
+        resultado_metodo = tk.Label(ventana_metodo, text="", font=("Arial", 13), bg="#1a3a2a", fg="#a8f0c6")
+        resultado_metodo.pack(pady=10)
 
-    Button(
-        ventana_impuestos,
-        text="Salir",
-        width=25,
-        bg="red",
-        fg="white",
-        command=ventana_impuestos.destroy
-    ).pack(pady=15)
+        def on_key_Press_metodo(event):
+            match event.char:
+                case "1":
+                    resultado_metodo.config(text="Pago con Tarjeta realizado. Imprimiendo ticket...")
+                case "2":
+                    resultado_metodo.config(text="Pago con QR realizado. Imprimiendo ticket...")
+                case "3":
+                    ventana_metodo.destroy()
 
+        ventana_metodo.bind("<KeyPress>", on_key_Press_metodo)
+        ventana_metodo.focus_set()
 
-def abrir_pagos(impuesto, monto):
+    def abrir_pagos(impuesto, monto):
+        ventana_confirmacion = tk.Toplevel()
+        ventana_confirmacion.title("Confirmación de pago")
+        ventana_confirmacion.geometry("500x300")
+        ventana_confirmacion.configure(bg="#1a3a2a")
 
-    ventana_pagos = Toplevel(root)
-    ventana_pagos.title("Pagos")
-    ventana_pagos.geometry("400x350")
-    ventana_pagos.config(bg="#cfc4ff")
+        tk.Label(ventana_confirmacion, text="CONFIRMACIÓN", font=("Arial", 18, "bold"), bg="#1a3a2a", fg="#ffffff").pack(pady=20)
+        tk.Label(ventana_confirmacion, text=f"Impuesto: {impuesto}", font=("Arial", 14), bg="#1a3a2a", fg="#a8f0c6").pack(pady=5)
+        tk.Label(ventana_confirmacion, text=f"Monto: ${monto}", font=("Arial", 14), bg="#1a3a2a", fg="#a8f0c6").pack(pady=5)
+        tk.Label(ventana_confirmacion, text="Presione 1 para pagar  |  2 para cancelar", font=("Arial", 13), bg="#1a3a2a", fg="#6dbf8a").pack(pady=15)
 
-    Label(
-        ventana_pagos,
-        text="MÓDULO DE PAGOS",
-        font=("Arial", 18, "bold"),
-        bg="#cfc4ff"
-    ).pack(pady=20)
+        resultado_confirmacion = tk.Label(ventana_confirmacion, text="", font=("Arial", 13), bg="#1a3a2a", fg="#ff6b6b")
+        resultado_confirmacion.pack(pady=10)
 
-    Label(
-        ventana_pagos,
-        text=f"Impuesto: {impuesto}",
-        font=("Arial", 12),
-        bg="#cfc4ff"
-    ).pack(pady=5)
+        def on_key_Press_confirmacion(event):
+            match event.char:
+                case "1":
+                    ventana_confirmacion.destroy()
+                    metodo_pago()
+                case "2":
+                    resultado_confirmacion.config(text="Operación cancelada")
 
-    Label(
-        ventana_pagos,
-        text=f"Monto a pagar: ${monto}",
-        font=("Arial", 12),
-        bg="#cfc4ff"
-    ).pack(pady=5)
+        ventana_confirmacion.bind("<KeyPress>", on_key_Press_confirmacion)
+        ventana_confirmacion.focus_set()
 
-    Label(
-        ventana_pagos,
-        text="Método de pago",
-        font=("Arial", 13, "bold"),
-        bg="#cfc4ff"
-    ).pack(pady=15)
+    def on_key_Press(event):
+        match event.char:
+            case "1":
+                abrir_pagos("Inmobiliario", ciudadano['imp_inmobiliario'])
+            case "2":
+                abrir_pagos("Patente", ciudadano['patente'])
+            case "3":
+                abrir_pagos("ABL", ciudadano['abl'])
+            case "4":
+                abrir_pagos("Domiciliario", ciudadano['domiciliario'])
+            case "5":
+                ventana.destroy()
 
-    Button(
-        ventana_pagos,
-        text="Pagar con tarjeta",
-        width=25,
-        height=2,
-        command=lambda: pagar("Tarjeta")
-    ).pack(pady=10)
-
-    Button(
-        ventana_pagos,
-        text="Pagar con QR",
-        width=25,
-        height=2,
-        command=lambda: pagar("QR")
-    ).pack(pady=10)
-
-    Button(
-        ventana_pagos,
-        text="Cancelar",
-        width=25,
-        height=2,
-        bg="red",
-        fg="white",
-        command=ventana_pagos.destroy
-    ).pack(pady=15)
-
-
-def pagar(metodo):
-
-    messagebox.showinfo(
-        "Pago realizado",
-        f"Pago realizado correctamente con {metodo}\n"
-        "Imprimiendo ticket..."
-    )
-
-
-# ---------------- VENTANA PRINCIPAL ---------------- #
-
-root = Tk()
-root.title("Sistema Municipal")
-root.geometry("450x300")
-root.config(bg="#cfc4ff")
-
-Label(
-    root,
-    text="SISTEMA MUNICIPAL",
-    font=("Arial", 20, "bold"),
-    bg="#cfc4ff"
-).pack(pady=30)
-
-Label(
-    root,
-    text="Seleccione un módulo",
-    font=("Arial", 13),
-    bg="#cfc4ff"
-).pack(pady=10)
-
-# ---------------- BOTONES ---------------- #
-
-Button(
-    root,
-    text="Impuestos",
-    width=30,
-    height=3,
-    bg="#8e7dff",
-    fg="white",
-    command=abrir_impuestos
-).pack(pady=10)
-
-Button(
-    root,
-    text="Salir",
-    width=30,
-    height=3,
-    bg="red",
-    fg="white",
-    command=root.destroy
-).pack(pady=10)
-
-# ---------------- EJECUCIÓN ---------------- #
-
-root.mainloop()
+    ventana.bind("<KeyPress>", on_key_Press)
+    ventana.focus_set()
