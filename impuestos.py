@@ -72,7 +72,7 @@ def VentanaImpuestos(ciudadano):
     def metodo_pago():
         ventana_metodo = tk.Toplevel()
         ventana_metodo.title("Método de pago")
-        ventana_metodo.geometry("500x300")
+        ventana.state("zoomed")
         ventana_metodo.configure(bg="#1a3a2a")
 
         tk.Label(ventana_metodo, text="MÉTODO DE PAGO", font=("Arial", 18, "bold"), bg="#1a3a2a", fg="#ffffff").pack(pady=20)
@@ -98,7 +98,7 @@ def VentanaImpuestos(ciudadano):
     def abrir_pagos(impuesto, monto):
         ventana_confirmacion = tk.Toplevel()
         ventana_confirmacion.title("Confirmación de pago")
-        ventana_confirmacion.geometry("500x300")
+        ventana.state("zoomed")
         ventana_confirmacion.configure(bg="#1a3a2a")
 
         tk.Label(ventana_confirmacion, text="CONFIRMACIÓN", font=("Arial", 18, "bold"), bg="#1a3a2a", fg="#ffffff").pack(pady=20)
