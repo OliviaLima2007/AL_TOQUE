@@ -104,7 +104,6 @@ def AbrirPrincipal():
   ciudadanos = buscar_ciudadano(dni.get())
   print("ciudadanos:", ciudadanos)
   if ciudadanos:
-    VentanaBienvenida.withdraw()    
     VentanaPrincipal(ciudadanos)    
   else:
       mensaje_error.config(text="⚠ DNI no encontrado en el sistema")
