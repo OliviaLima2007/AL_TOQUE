@@ -43,8 +43,8 @@ def abrir_turnos(ciudadanos):
     
     tk.Label(
         pie,
-        text="Sistema AL TOQUE | 2025")
-        font=("Arial", 11)
+        text="Sistema AL TOQUE | 2026",
+        font=("Arial", 11),
         bg="#145a32",
         fg="#a8f0c6"
     ).pack()
@@ -55,7 +55,7 @@ def abrir_turnos(ciudadanos):
     
     tk.Label(cuerpo,
              text="SOLICITUD DE TURNO",
-             font=("Arial",16,"bold")
+             font=("Arial",16,"bold"),
              bg="#1a3a2a",
              fg="#ffffff").pack(pady=10)
 
@@ -63,7 +63,6 @@ def abrir_turnos(ciudadanos):
     tk.Label(cuerpo,text=f"DNI: {ciudadanos['dni']}", font=("Arial", 16), bg="#1a3a2a", fg="#a8f0c6").pack()
     tk.Label(cuerpo,text=f"Teléfono: {ciudadanos['telefono']}", font=("Arial", 16), bg="#1a3a2a", fg="#a8f0c6").pack()
     tk.Label(cuerpo,text=f"Dirección: {ciudadanos['direccion']}", font=("Arial", 16), bg="#1a3a2a", fg="#a8f0c6").pack()
-    tk.Label(cuerpo,text="SOLICITUD DE TURNO",font=("Arial",16,"bold"), font=("Arial", 16), bg="#1a3a2a", fg="#a8f0c6").pack()
     
     tk.Label(cuerpo, text="Trámite:", font=("Arial", 16), bg="#1a3a2a", fg="#d4f5e2").pack()
     entrada_tramite = tk.Entry(cuerpo, font=("Arial", 16), bg="#1a3a2a", fg="#d4f5e2")
@@ -83,7 +82,7 @@ def abrir_turnos(ciudadanos):
 
     tk.Label(cuerpo, text="Presione 1 para confirmar el turno", font=("Arial", 14), bg="#1a3a2a", fg="#6dbf8a").pack(pady=15)
 
-    tk.Label(cuerpo,text="",justify="left",font=("Arial",13), bg="#1a3a2a", fg="#a8f0c6").pack(pady=10)
+    comprobante=tk.Label(cuerpo,text="",justify="left",font=("Arial",13), bg="#1a3a2a", fg="#a8f0c6").pack(pady=10)
 
 #guarda el turno
     def guardar():
