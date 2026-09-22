@@ -12,7 +12,7 @@ def VentanaMultas(ciudadano):
 
     tk.Label(
         encabezado,
-        text="MUNICIPALIDAD DE MERLO",
+        text="AL TOQUE",
         font=("Arial", 22, "bold"),
         bg="#145a32",
         fg="#a8f0c6"
@@ -32,7 +32,7 @@ def VentanaMultas(ciudadano):
 
     tk.Label(
         pie,
-        text="Sistema AL TOQUE  |  Municipalidad de Merlo  |  2025",
+        text="Sistema AL TOQUE  |  2025",
         font=("Arial", 11),
         bg="#145a32",
         fg="#a8f0c6"
