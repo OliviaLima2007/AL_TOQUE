@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS ciudadanos (
 
 cursor.execute("""
     INSERT INTO ciudadanos (dni, nombre, telefono, direccion, multas, imp_inmobiliario, abl, domiciliario, exp_numero, exp_tramite, exp_estado)
-    VALUES ((30112233, "Lucía Fernández", "11-4455-1122", "Av. San Martín 1234, Merlo", None, "Al día", "Al día", "Al día", None, None, None)""")
+    VALUES (30112233, "Lucía Fernández", "11-4455-1122", "Av. San Martín 1234, Merlo", None, "Al día", "Al día", "Al día", None, None, None)""")
 
 cursor.execute("""
     INSERT INTO ciudadanos (dni, nombre, telefono, direccion, multas, imp_inmobiliario, abl, domiciliario, exp_numero, exp_tramite, exp_estado)
