@@ -3,8 +3,8 @@ from conexion import buscar_ciudadano
 
 VentanaBienvenida = tk.Tk()
 VentanaBienvenida.title("AL TOQUE")
-VentanaBbienvenida.state("zoomed")
-VentanaBbienvenida.configure(bg="#1a3a2a")
+VentanaBienvenida.state("zoomed")
+VentanaBienvenida.configure(bg="#1a3a2a")
 
 #INICIO DE ENCABEZADO
 encabezado=tk.Frame(VentanaBienvenida, bg="#145a32", pady=20)
