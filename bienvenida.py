@@ -27,7 +27,7 @@ tk.Label(
 #--------------------
 #INICIO DE CUERPO 
 
-cuerpo=tk.frame(VentanaBienvenida, bg="#1a3a2a")
+cuerpo=tk.Frame(VentanaBienvenida, bg="#1a3a2a")
 cuerpo.pack(expand=True)
 
 tk.Label(
