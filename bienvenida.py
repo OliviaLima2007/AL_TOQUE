@@ -82,7 +82,7 @@ pie.pack(fill=tk.X, side=tk.BOTTOM)
 
 tk.Label(
     pie,
-    text="Sistema AL TOQUE  |  Municipalidad de Merlo  |  2025",
+    text="Sistema AL TOQUE  |  2026",
     font=("Arial", 11),
     bg="#145a32",
     fg="#a8f0c6"
