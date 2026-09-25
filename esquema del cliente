@@ -1,0 +1,6 @@
+create table cliente(
+    id serial primary key,
+    nombre varchar(50) null,
+    tramite varchar (20) null,
+    dni number(8)null, 
+)
